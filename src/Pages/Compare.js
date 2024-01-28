@@ -12,7 +12,7 @@ import { settingChartData } from '../functions/settingChartData';
 import LineChart from '../Components/Coin/Chart-Line';
 import TogglePrice from '../Components/Coin/Toggle-buttons';
 
- 
+
 const Compare=()=>{
 const[crypto1,setCrypto1]=useState("bitcoin");
 const[crypto2,setCrypto2]=useState("ethereum");
@@ -25,18 +25,28 @@ const[chartData, setChartData] = useState({});
 async function handleDaysChange(event){
     setLoading(true)
     setDays(event.target.value);
+    console.log("days done");
     const prices1=await getCoinPrices(crypto1,event.target.value,priceType);
-    const prices2=await getCoinPrices(crypto2,event.target.value,priceType);
-    settingChartData(setChartData,prices1,prices2);
-    setLoading(false);
+    if(prices1.length > 0){
+        const prices2=await getCoinPrices(crypto2,event.target.value,priceType);
+        if(prices1.length>0&&prices2.length > 0){
+            settingChartData(setChartData,prices1,prices2);
+            setLoading(false);
+            console.log("days done");
+        }
+    }
 }
 const handlePriceTypeChange = async (event,newType) => {
     setLoading(true);
     setPriceType(newType);
     const prices1=await getCoinPrices(crypto1,days,newType);
+    if(prices1.length>0){
     const prices2=await getCoinPrices(crypto2,days,newType);
-    settingChartData(setChartData,prices1,prices2);
-    setLoading(false);
+        if(prices1.length>0&&prices2.length>0){
+            settingChartData(setChartData,prices1,prices2);
+            setLoading(false);
+        }
+    }
 };
 useEffect(()=>{
     getData();
@@ -50,9 +60,13 @@ async function getData(){
         if(Data2){
             coinObject(setCrypto2Data,Data2);
             const prices1=await getCoinPrices(crypto1,days,priceType);
+            if(prices1.length > 0){
             const prices2=await getCoinPrices(crypto2,days,priceType);
-            settingChartData(setChartData,prices1,prices2);
-            setLoading(false);
+                if(prices1.length>0&&prices2.length > 0){
+                    settingChartData(setChartData,prices1,prices2);
+                    setLoading(false);
+                }
+            }
         }
     }
 }
@@ -62,12 +76,15 @@ const handleCoinChange= async (event,isCoin2)=>{
         setCrypto2(event.target.value);
         const Data=await getCoinData(event.target.value);
         coinObject(setCrypto2Data,Data);
+        if(Data.length>0){
         const prices1=await getCoinPrices(crypto1,days,priceType);
-        const prices2=await getCoinPrices(crypto2,days,priceType);
-        if(prices1.length>0&&prices2.length>0){
-            console.log("Wow",prices1,prices2);
-            setLoading(false);
-            //settingChartData(setChartData,prices1,prices2);
+            if(prices1.length > 0){
+            const prices2=await getCoinPrices(crypto2,days,priceType);
+                if(prices1.length>0&&prices2.length>0){
+                    console.log("Wow",prices1,prices2);
+                    setLoading(false);
+                }
+            }
         }
     }
     else{
