@@ -1,0 +1,28 @@
+.share{
+padding: 0.8rem 3rem;
+margin-right: 3vw;
+border-radius: 5vw;
+color:white;
+background-color: var(--black);
+border: 1px solid var(--blue);
+cursor: pointer;
+transition: all 0.5s;
+}
+.share:hover{
+background-color: var(--blue);
+}
+@media only screen and (max-width:426px){
+.share{
+    padding: 0.4rem 1rem;
+}
+}
+@media only screen and (max-width:376px){
+.share{
+    padding: 0.4rem 1rem;
+}
+}
+@media only screen and  (max-width:320px){
+.share{
+    padding: 0.4rem 1rem;
+}
+}

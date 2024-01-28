@@ -1,0 +1,17 @@
+
+@media only screen and (max-width: 400px){
+    .short-padding{
+        padding: 0.2rem!important;
+        margin: 0.2rem!important;
+    }
+    .short-padding .decrease-margin{
+    margin: 0.5rem 0.1rem !important;
+    gap: 0.2rem !important;
+    display: block !important;
+    padding: 0rem 0.1rem!important;
+    }
+    .short-padding .decrease-margin .reduce-size{
+        margin-right: 0rem !important;
+    }
+    
+}

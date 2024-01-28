@@ -1,0 +1,131 @@
+.list{
+    width:90%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.table-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:0.5rem;
+    margin: 1.5rem;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+.table-row:hover{
+    background-color: var(--darkgrey);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+.list td{
+    text-align: left;
+    width:18%
+}
+.img-td{
+    width:3rem !important;
+    margin-right: 1.5rem;
+}
+.align-price{
+    text-align: left !important ;
+}
+.align-left{
+    color:var(--lightgrey);
+    text-align: left !important;
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
+}
+.mobile-marketCap{
+    display: none;
+}
+.star{
+    width:2rem !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center;
+}
+@media only screen and (max-width: 1500px){
+    .market-left{
+        margin-left: 1rem !important;
+    }
+    
+} 
+@media only screen and (max-width: 1200px){
+    .list{
+        width:96%;
+    }
+} 
+@media only screen and (max-width: 1000px){
+    .remove-icon{
+        display: none !important; 
+    }
+}
+@media only screen and (max-width: 800px){
+    .desktop-marketCap{
+        display: none;
+    }
+    .mobile-marketCap{
+        display: block;
+    }
+    .table-row{
+        gap:0.5rem;
+        margin: 1rem;
+        padding: 1rem;
+        border-radius: 1rem;
+        width:100% !important
+    }
+    .list td{
+        text-align: left;
+        width:10%;
+    }
+    .img-td{
+        width:1.5rem !important;
+        margin-right: 1rem;
+    }
+    .coinsImg{
+        width:2rem  !important;
+        height:2rem !important;
+    }
+    .align-left{
+        font-size: 0.6rem !important;
+        font-weight: 500 !important;
+        margin-left: -1.8rem;
+    }
+    .align-price{
+        font-size: 0.6rem !important;
+        font-weight: 500 !important;
+        margin-left: 0.3rem;
+    }
+    .decrease-name{
+        font-size: 0.7rem!important;
+        font-weight: 500!important;
+    }
+    .decrease-sym{
+        font-size: 1rem!important;
+        font-weight: 500!important;
+    }
+    .decrease-margin{
+        margin: 0.5rem 0.75rem !important;
+        gap:0.2rem !important;
+        display: block !important;
+        padding: 0rem 0.5rem!important;
+    }
+    .reduce-size{
+        display: flex;
+        min-width: 20px !important;
+        font-size: 0.5rem !important;
+        margin-right: 1rem !important;
+        padding: 0.3rem 1.2rem !important;
+        align-items: center;
+        justify-content: center;
+    }
+    .table-row{
+        padding: 0.2rem !important;
+        margin: 0.2rem  !important;
+    }
+    .star-div{
+        display: none !important;
+    }
+    
+
+}  

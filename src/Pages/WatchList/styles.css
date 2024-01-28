@@ -1,0 +1,19 @@
+.watchList{
+    display: flex !important;
+    flex-direction: column;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100vh !important;
+}
+.movebutton{
+    padding: 0.8rem 1rem;
+    border-radius: 3rem;
+    color:white;
+    background-color: var(--blue);
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+.fullheigth{
+    height: 100vh;
+}

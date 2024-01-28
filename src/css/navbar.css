@@ -1,0 +1,65 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--black);
+    position: sticky;
+    top: 0; /* Add this line to set the top position */
+    z-index: 1000; /* Adjust the z-index as needed */
+    padding: 1rem 3rem;
+}
+.navbar h1{
+color:white;
+cursor: pointer;
+font-size:2rem;
+}
+.navbar .links{
+display:flex;
+align-items: center;
+justify-content: flex-end;
+gap:1.5rem;
+}
+.navbar h1::after{
+content: ".";
+color:var(--blue);
+}
+.navbar a{
+text-decoration: none;
+cursor: pointer;
+color: var(--grey)
+}
+.navbar a:hover{
+color:white;
+}
+.drawer{
+display: none;
+}
+@media only screen and (max-width:800px){
+.navbar{
+    padding: 0.5rem 1.8rem;
+}
+.navbar h1{
+    font-size: 1.5rem;
+}
+.navbar .links{
+    display: none;
+}
+.navbar .drawer{
+    display: block;
+}
+.drawer-links{
+    display: flex;
+    width:45vw;
+    height: 100vh;
+    flex-direction: column;
+    background-color: var(--black);
+}
+.drawer-links a{
+    text-decoration: none;
+    color: var(--grey);
+    padding: 0.5rem 1.5rem;
+}
+.drawer-links .switch{
+    padding: 0.5rem 1.5rem;
+}
+}
