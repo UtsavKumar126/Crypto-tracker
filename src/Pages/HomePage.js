@@ -7,6 +7,7 @@ import shareButCss from "../css/shareButton.css"
 import homepageCss from "../css/homepage.css"
 import { motion } from "framer-motion";
 import CoinContext from "../Context/CoinContext"
+import { RWebShare } from "react-web-share";
 
 
 const HomePage=()=>{
@@ -36,8 +37,19 @@ const HomePage=()=>{
                 transition={{duration:0.5,delay:1.5}} 
                 >
                     <button className="dashbutton" onClick={()=>navigate("/dashboard")}>DashBoard</button>
-                    <button className="share">Share</button>
-                </motion.div>
+                    <RWebShare
+                    data={{
+                        text: "Share Crypto Tracker",
+                        url: "https://crypto-tracker-chi-six.vercel.app/",
+                        title: "Crypto Tracker",
+                    }}
+                    onClick={() =>
+                        console.log("shared successfully!")
+                    }
+                >
+                <button className="share">Share</button>
+            </RWebShare>
+        </motion.div>
             </div>
             <div className="container-phone">
                 <img src={gradient}alt="grad" className="gradient"/>

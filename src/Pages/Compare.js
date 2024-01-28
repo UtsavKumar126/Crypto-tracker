@@ -53,6 +53,7 @@ useEffect(()=>{
 },[])
 async function getData(){
     setLoading(true);
+    try{
     const Data1=await getCoinData(crypto1);
     if(Data1){
         const Data2=await getCoinData(crypto2);
@@ -69,6 +70,11 @@ async function getData(){
             }
         }
     }
+}
+catch(error){
+    console.log(error);
+    setLoading(false);
+}
 }
 const handleCoinChange= async (event,isCoin2)=>{
     setLoading(true);
