@@ -11,6 +11,7 @@ import axios from 'axios';
 import DashButtoncss from "../../css/dashbutton.css"
 import "./styles.css"
 import { useNavigate } from 'react-router-dom';
+import { get100Coins } from '../../functions/get100Coins';
 
 function WatchList() {
   const {watchList}=useContext(CoinContext);
@@ -18,16 +19,15 @@ function WatchList() {
   const[loading,setLoading]=useState(true);
   const navigate=useNavigate();
   useEffect(()=>{
-    axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en")
-    .then(res=>{
-    setCoins(res.data);
-    setLoading(false);
-    })
-    .catch((err)=>{
-      console.error(err);
-      setLoading(false);
-    })
+    getData();
   },[])
+  const getData=async ()=>{
+    const allCoins=await get100Coins();
+    if(allCoins){
+      setCoins(allCoins);
+      setLoading(false);
+    }
+  }
   const [value, setValue] = React.useState('1');
 
     const handleChange = (event, newValue) => {

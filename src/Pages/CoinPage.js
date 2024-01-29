@@ -16,6 +16,7 @@ import TogglePrice from '../Components/Coin/Toggle-buttons';
 
 function CoinPage() {
 const{id}=useParams();
+const[error,setError]=useState();
 const[loading,setLoading]=useState(true);
 const [coinData,setCoinData]=useState();
 const[days,setDays]=useState(30);
@@ -28,31 +29,31 @@ useEffect(()=>{
 },[id])
 
 async function getData(){
+    setLoading(true);
     const Data=await getCoinData(id);
+    coinObject(setCoinData,Data);
     if(Data){
-        coinObject(setCoinData,Data);
-        const prices=await getCoinPrices(id,days,priceType);
+        const prices=await getCoinPrices(id,days,priceType,setError);
         if(prices.length>0){
             console.log("Wow");
             settingChartData(setChartData,prices);
+            setLoading(false);
         }
-        setLoading(false);
     }
 }
 const handleDaysChange = async (event) => {
     setLoading(true)
     setDays(event.target.value);
-    const prices=await getCoinPrices(id,event.target.value,priceType);
+    const prices=await getCoinPrices(id,event.target.value,priceType,setError);
     if(prices){
         settingChartData(setChartData,prices);
         setLoading(false);
     }
 }
-  const handlePriceTypeChange = async (event,newType) => {
+  const handlePriceTypeChange = async (event) => {
     setLoading(true);
-    setPriceType(newType);
-    const prices= await getCoinPrices(id,days,newType);
-    console.log(prices);
+    setPriceType(event.target.value);
+    const prices= await getCoinPrices(id,days,event.target.value,setError);
     if(prices){
         settingChartData(setChartData,prices);
         setLoading(false);
@@ -61,7 +62,7 @@ const handleDaysChange = async (event) => {
   return (
     <div style={{height:"100%",
                  width:"100vw"}}>
-        {loading?<Loader/>:(
+        {!error &&!loading && coinData.id?(
         <>    
         <div className='grey-wrapper short-padding'>
             <List coin={coinData}/>
@@ -73,7 +74,7 @@ const handleDaysChange = async (event) => {
         </div>
         <CoinInfo title={coinData.name} desc={coinData.desc}/>
         </>
-        )}
+        ):<Loader/>}
     </div> 
   )
 }

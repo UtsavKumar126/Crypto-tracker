@@ -3,9 +3,9 @@ import { get100Coins } from '../../../functions/get100Coins';
 import { Select } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import "./styles.css"
+import SelectDays from '../../Coin/SelectDays';
 
-function SelectCoins({crypto1,crypto2,handleCoinChange}) {
-    const[allCoins,setAllCoins]=useState([]);
+function SelectCoins({allCoins,crypto1,crypto2,handleCoinChange,days,handleDaysChange}) {
     const styles={
         height:"2.5rem",
         color:"var(--white)",
@@ -20,15 +20,6 @@ function SelectCoins({crypto1,crypto2,handleCoinChange}) {
                 borderColor: "var(--blue)",
             },
         },
-    }
-    
-    useEffect(()=>{
-      getData();
-    },[]);
-    const getData=async ()=>{
-      const myCoins=await get100Coins();
-      console.log(myCoins);
-      setAllCoins(myCoins);
     }
   return (
     <div className='coin-flex'>
@@ -51,6 +42,11 @@ function SelectCoins({crypto1,crypto2,handleCoinChange}) {
         >
           {allCoins.filter((item)=>item.id!=crypto1).map((coin,i)=><MenuItem key={i} value={coin.id}>{coin.name}</MenuItem>)}
         </Select>
+        <SelectDays
+        days={days}
+        handleDaysChange={handleDaysChange}
+        nopTag={true}
+        />
     </div>
   )
 }

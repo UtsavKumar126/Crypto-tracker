@@ -12,7 +12,9 @@ export default function TogglePrice({priceType,handlePriceTypeChange}) {
     <ToggleButtonGroup
       value={priceType}
       exclusive
-      onChange={handlePriceTypeChange}
+      onChange={(e)=>{
+        handlePriceTypeChange(e)
+      }}
       sx={{
         "& .Mui-selected": {
             color: "var(--blue) !important"

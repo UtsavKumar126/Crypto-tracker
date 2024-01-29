@@ -45,14 +45,14 @@ export default function TabsComponent({coins,setSearch}) {
         <TabPanel value="1">
            <div className='grid-view'>
             {coins.map((coin,i)=>(
-              <Grid coin={coin} key={i}/>
+              <Grid coin={coin} key={i} delay={(i%4)*0.2}/>
             ))}
            </div>
         </TabPanel>
         <TabPanel value="2">
         <table className='list'>
             {coins.map((coin,i)=>(
-              <List coin={coin} key={i}/>
+              <List coin={coin} key={i} delay={(i%8)*2}/>
             ))}
         </table>
         </TabPanel>

@@ -11,103 +11,93 @@ import CoinInfo from '../Components/Coin/CoinInfo';
 import { settingChartData } from '../functions/settingChartData';
 import LineChart from '../Components/Coin/Chart-Line';
 import TogglePrice from '../Components/Coin/Toggle-buttons';
+import { get100Coins } from '../functions/get100Coins';
 
 
 const Compare=()=>{
 const[crypto1,setCrypto1]=useState("bitcoin");
 const[crypto2,setCrypto2]=useState("ethereum");
+const[allCoins,setAllCoins]=useState([])
 const[days,setDays]=useState(30);
 const[crypto1Data,setCrypto1Data]=useState({});
 const[crypto2Data,setCrypto2Data]=useState({});
 const[loading, setLoading] = useState(true);
 const[priceType, setPriceType] = useState('prices');
 const[chartData, setChartData] = useState({});
-async function handleDaysChange(event){
-    setLoading(true)
-    setDays(event.target.value);
-    console.log("days done");
-    const prices1=await getCoinPrices(crypto1,event.target.value,priceType);
-    if(prices1.length > 0){
-        const prices2=await getCoinPrices(crypto2,event.target.value,priceType);
-        if(prices1.length>0&&prices2.length > 0){
-            settingChartData(setChartData,prices1,prices2);
-            setLoading(false);
-            console.log("days done");
-        }
-    }
-}
-const handlePriceTypeChange = async (event,newType) => {
-    setLoading(true);
-    setPriceType(newType);
-    const prices1=await getCoinPrices(crypto1,days,newType);
-    if(prices1.length>0){
-    const prices2=await getCoinPrices(crypto2,days,newType);
-        if(prices1.length>0&&prices2.length>0){
-            settingChartData(setChartData,prices1,prices2);
-            setLoading(false);
-        }
-    }
-};
 useEffect(()=>{
     getData();
-},[])
+},[]);
 async function getData(){
     setLoading(true);
-    try{
-    const Data1=await getCoinData(crypto1);
-    if(Data1){
-        const Data2=await getCoinData(crypto2);
-        coinObject(setCrypto1Data,Data1); 
-        if(Data2){
-            coinObject(setCrypto2Data,Data2);
+    const coins= await get100Coins();
+    if(coins){
+        setAllCoins(coins);
+        const data1= await getCoinData(crypto1);
+        const data2= await getCoinData(crypto2);
+        coinObject(setCrypto1Data,data1);
+        coinObject(setCrypto2Data,data2);
+        if(data1&&data2){
             const prices1=await getCoinPrices(crypto1,days,priceType);
-            if(prices1.length > 0){
             const prices2=await getCoinPrices(crypto2,days,priceType);
-                if(prices1.length>0&&prices2.length > 0){
-                    settingChartData(setChartData,prices1,prices2);
-                    setLoading(false);
-                }
-            }
+            settingChartData(setChartData,prices1,prices2);
+            setLoading(false);
         }
     }
-}
-catch(error){
-    console.log(error);
-    setLoading(false);
-}
+   
 }
 const handleCoinChange= async (event,isCoin2)=>{
     setLoading(true);
     if(isCoin2){
         setCrypto2(event.target.value);
-        const Data=await getCoinData(event.target.value);
-        coinObject(setCrypto2Data,Data);
-        if(Data.length>0){
-        const prices1=await getCoinPrices(crypto1,days,priceType);
-            if(prices1.length > 0){
-            const prices2=await getCoinPrices(crypto2,days,priceType);
-                if(prices1.length>0&&prices2.length>0){
-                    console.log("Wow",prices1,prices2);
-                    setLoading(false);
-                }
-            }
-        }
+        const data2=await getCoinData(event.target.value);
+        coinObject(setCrypto2Data,data2);
+        const price1=await getCoinPrices(crypto1,days,priceType)
+        const price2=await getCoinPrices(event.target.value,days,priceType)
+        settingChartData(setChartData,price1,price2);
     }
     else{
         setCrypto1(event.target.value);
-        const Data=await getCoinData(event.target.value);
-        coinObject(setCrypto1Data,Data);
+        const data1=await getCoinData(event.target.value);
+        coinObject(setCrypto1Data,data1);
+        const price1=await getCoinPrices(event.target.value,days,priceType)
+        const price2=await getCoinPrices(crypto2,days,priceType)
+        settingChartData(setChartData,price1,price2);
     }
-    
+    setLoading(false); 
 }
+
+async function handleDaysChange(event){
+    setLoading(true)
+    setDays(event.target.value);
+    console.log("days done");
+    const prices1=await getCoinPrices(crypto1,event.target.value,priceType);
+    const prices2=await getCoinPrices(crypto2,event.target.value,priceType);
+    settingChartData(setChartData,prices1,prices2);
+    setLoading(false);
+}
+const handlePriceTypeChange = async (event) => {
+    setLoading(true);
+    setPriceType(event.target.value);
+    const prices1=await getCoinPrices(crypto1,days,event.target.value);
+    const prices2=await getCoinPrices(crypto2,days,event.target.value);
+    settingChartData(setChartData,prices1,prices2);
+    setLoading(false);
+};
+
 
     return(
     <div>
         {loading?(<Loader/>):(
     <>    
     <div className='coin-days-flex'>
-        <SelectCoins crypto1={crypto1} crypto2={crypto2} handleCoinChange={handleCoinChange}/>
-        <SelectDays days={days} handleDaysChange={handleDaysChange} nopTag={true}/>
+        <SelectCoins
+        allCoins={allCoins}
+        crypto1={crypto1} 
+        crypto2={crypto2} 
+        handleCoinChange={handleCoinChange}
+        days={days}
+        handleDaysChange={handleDaysChange}
+        />
     </div>
     <div className='grey-wrapper short-padding'>
         <List coin={crypto1Data}/>
