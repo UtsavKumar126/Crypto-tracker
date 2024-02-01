@@ -12,6 +12,7 @@ import DashButtoncss from "../../css/dashbutton.css"
 import "./styles.css"
 import { useNavigate } from 'react-router-dom';
 import { get100Coins } from '../../functions/get100Coins';
+import Footer from '../../Components/Footer';
 
 function WatchList() {
   const {watchList}=useContext(CoinContext);
@@ -34,7 +35,7 @@ function WatchList() {
       setValue(newValue);
     };
     const style={
-      color:"var(--white)",
+      color:"var(--color-element)",
       fontSize:"1.2rem",
       fontWeight:"600",
       textTransform:"capitalize"
@@ -49,6 +50,10 @@ function WatchList() {
 
   return (
     watchList.length>0?(
+      <>
+      <div style={{
+        height: '100vh',
+      }}>
       <ThemeProvider theme={theme}>
         <TabContext value={value}>
           <div>
@@ -76,11 +81,18 @@ function WatchList() {
           </TabPanel>
         </TabContext>
       </ThemeProvider>
+      </div>
+      <Footer/>
+      </>
+
   ):(
+    <>
     <div className='watchList'>
       <h1>No Data Found</h1>
       <button className='movebutton' onClick={()=>navigate("/dashboard")}>Move To DashBoard</button>
     </div>
+    <Footer/>
+    </>
   )
   )
 }

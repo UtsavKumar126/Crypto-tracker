@@ -13,7 +13,7 @@ export default function PaginationControlled({page,handleChange}) {
   page={page} 
   onChange={(e,v)=>handleChange(e,v)}
   sx={{
-    color: "white !important",
+    color: ` !important`,
     "& .Mui-selected": {
       backgroundColor: "var(--blue) !important",
       color: "white !important",

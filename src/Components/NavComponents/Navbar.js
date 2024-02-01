@@ -7,15 +7,11 @@ import SwitchTheme from "./SwitchTheme";
 import dashButCss from "../../css/dashbutton.css"
 
 const Navbar=()=>{
-    const [checked, setChecked] = useState(true);
     const navigate=useNavigate();
+    const[checked,setChecked]=useState(localStorage.getItem("theme")==="dark"?true:false);
     return(
-        <div className="navbar" style={{
-            backgroundColor:checked?"var(--black)":"white",
-        }}>
-            <h1 onClick={()=>navigate("/")} style={{
-                color:checked?"white":"black"
-            }}>CryptoTracker</h1>
+        <div className="navbar">
+            <h1 onClick={()=>navigate("/")}>CryptoTracker</h1>
             <div className="links">
             <SwitchTheme checked={checked} setChecked={setChecked}/>
             <NavLink to={"/"}>Home</NavLink>
@@ -24,7 +20,7 @@ const Navbar=()=>{
             <button onClick={()=>navigate("/dashboard")} className="dashbutton">DashBoard</button>
             </div>
             <div className="drawer">
-                <TemporaryDrawer checked={checked} setChecked={setChecked} />
+                <TemporaryDrawer/>
             </div>
         </div>
     )

@@ -12,6 +12,7 @@ import { settingChartData } from '../functions/settingChartData';
 import LineChart from '../Components/Coin/Chart-Line';
 import TogglePrice from '../Components/Coin/Toggle-buttons';
 import { get100Coins } from '../functions/get100Coins';
+import Footer from '../Components/Footer';
 
 
 const Compare=()=>{
@@ -87,7 +88,12 @@ const handlePriceTypeChange = async (event) => {
 
     return(
     <div>
-        {loading?(<Loader/>):(
+        {loading?(
+        <>   
+        <Loader/>
+        <Footer/>
+        </> 
+        ):(
     <>    
     <div className='coin-days-flex'>
         <SelectCoins
@@ -111,6 +117,7 @@ const handlePriceTypeChange = async (event) => {
     </div>
     <CoinInfo title={crypto1Data.name} desc={crypto1Data.desc}/>
     <CoinInfo title={crypto2Data.name} desc={crypto2Data.desc}/>
+    <Footer/>
     </>
     )
     } 

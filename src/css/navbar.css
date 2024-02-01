@@ -2,14 +2,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--black);
     position: sticky;
     top: 0; /* Add this line to set the top position */
     z-index: 1000; /* Adjust the z-index as needed */
     padding: 1rem 3rem;
 }
 .navbar h1{
-color:white;
 cursor: pointer;
 font-size:2rem;
 }
@@ -26,10 +24,10 @@ color:var(--blue);
 .navbar a{
 text-decoration: none;
 cursor: pointer;
-color: var(--grey)
+color: var(--grey);
 }
 .navbar a:hover{
-color:white;
+color:var(--anchor-hover);
 }
 .drawer{
 display: none;

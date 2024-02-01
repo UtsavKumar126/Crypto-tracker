@@ -8,12 +8,14 @@ import homepageCss from "../css/homepage.css"
 import { motion } from "framer-motion";
 import CoinContext from "../Context/CoinContext"
 import { RWebShare } from "react-web-share";
+import Footer from "../Components/Footer";
 
 
 const HomePage=()=>{
     const navigate=useNavigate();
     const{name}=useContext(CoinContext);
     return(
+        <>
         <div className="homePage">
             <div className="left-comp">
                 <motion.h1 className="heading1"
@@ -65,6 +67,8 @@ const HomePage=()=>{
                 />
         </div>
     </div>
+    <Footer/>
+    </>
     )
 }
 export default HomePage;

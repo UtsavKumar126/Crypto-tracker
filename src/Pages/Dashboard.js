@@ -6,6 +6,7 @@ import Search from '../Components/DashBoard/Search';
 import PaginationControlled from '../Components/DashBoard/Pagination';
 import Loader from '../Components/Loader';
 import { get100Coins } from '../functions/get100Coins';
+import Footer from '../Components/Footer';
 
 const Dashboard = ()=> {
   const [coins,setCoins]=useState([]);
@@ -39,12 +40,20 @@ const Dashboard = ()=> {
     }
   }
   return (
-    <>{loading?(<Loader/>):(
+    <>{loading?(
+      <>
+       <Loader/>
+       <Footer/>
+      </>
+    ):(
+      <>
       <div className='dashboard'>
         <Search search={search} setSearch={setSearch}/>
         <TabsComponent coins={search? searchData:paginatedCoins} setSearch={setSearch}/>
         {!search &&<PaginationControlled page={page} handleChange={handleChange}/>}
       </div>
+      <Footer/>
+      </>
       )}
     </>
     

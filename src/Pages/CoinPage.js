@@ -13,6 +13,7 @@ import { convertDate } from '../functions/convertDate';
 import SelectDays from '../Components/Coin/SelectDays';
 import { settingChartData } from '../functions/settingChartData';
 import TogglePrice from '../Components/Coin/Toggle-buttons';
+import Footer from '../Components/Footer';
 
 function CoinPage() {
 const{id}=useParams();
@@ -73,8 +74,14 @@ const handleDaysChange = async (event) => {
             <LineChart chartData={chartData} priceType={priceType}/>
         </div>
         <CoinInfo title={coinData.name} desc={coinData.desc}/>
+        <Footer/>
         </>
-        ):<Loader/>}
+        ):
+        <>
+        <Loader/>
+        <Footer/>
+        </>
+        }
     </div> 
   )
 }

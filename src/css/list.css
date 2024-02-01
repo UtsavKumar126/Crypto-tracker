@@ -12,9 +12,11 @@
     margin: 1.5rem;
     padding: 1rem;
     border-radius: 1rem;
+    color:var(--chip-text-color);
+    background-color: var(--list-background-color);
 }
 .table-row:hover{
-    background-color: var(--darkgrey);
+    background-color: var(--list-background-color-hover);
     transition: all 0.3s;
     cursor: pointer;
 }
@@ -30,7 +32,7 @@
     text-align: left !important ;
 }
 .align-left{
-    color:var(--lightgrey);
+    color:var(--chip-text-color);
     text-align: left !important;
     font-size: 1.2rem !important;
     font-weight: 600 !important;

@@ -6,7 +6,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import { ThemeProvider, createTheme } from '@mui/material';
 import Grid from './Grid';
 import List from './List';
-import dashCss from "../../css/dashboard.css"
+import dashCss from "../../css/dashboard.css" 
 
 export default function TabsComponent({coins,setSearch}) {
   const [value, setValue] = React.useState('1');
@@ -15,7 +15,7 @@ export default function TabsComponent({coins,setSearch}) {
     setValue(newValue);
   };
   const style={
-    color:"var(--white)",
+    color:"var(--color-element)",
     fontSize:"1.2rem",
     fontWeight:"600",
     textTransform:"capitalize"
