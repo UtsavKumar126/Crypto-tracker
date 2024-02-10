@@ -40,7 +40,7 @@ async function getData(){
         if(data1&&data2){
             const prices1=await getCoinPrices(crypto1,days,priceType);
             const prices2=await getCoinPrices(crypto2,days,priceType);
-            settingChartData(setChartData,prices1,prices2);
+            settingChartData(setChartData,prices1,prices2,crypto1Data.name,crypto2Data.name);
             setLoading(false);
         }
     }
@@ -54,7 +54,7 @@ const handleCoinChange= async (event,isCoin2)=>{
         coinObject(setCrypto2Data,data2);
         const price1=await getCoinPrices(crypto1,days,priceType)
         const price2=await getCoinPrices(event.target.value,days,priceType)
-        settingChartData(setChartData,price1,price2);
+        settingChartData(setChartData,price1,price2,crypto1Data.name,event.target.value);
     }
     else{
         setCrypto1(event.target.value);
@@ -62,7 +62,7 @@ const handleCoinChange= async (event,isCoin2)=>{
         coinObject(setCrypto1Data,data1);
         const price1=await getCoinPrices(event.target.value,days,priceType)
         const price2=await getCoinPrices(crypto2,days,priceType)
-        settingChartData(setChartData,price1,price2);
+        settingChartData(setChartData,price1,price2,event.target.value,crypto2Data.name);
     }
     setLoading(false); 
 }
@@ -73,7 +73,7 @@ async function handleDaysChange(event){
     console.log("days done");
     const prices1=await getCoinPrices(crypto1,event.target.value,priceType);
     const prices2=await getCoinPrices(crypto2,event.target.value,priceType);
-    settingChartData(setChartData,prices1,prices2);
+    settingChartData(setChartData,prices1,prices2,crypto1Data.name,crypto2Data.name);
     setLoading(false);
 }
 const handlePriceTypeChange = async (event) => {
@@ -81,7 +81,7 @@ const handlePriceTypeChange = async (event) => {
     setPriceType(event.target.value);
     const prices1=await getCoinPrices(crypto1,days,event.target.value);
     const prices2=await getCoinPrices(crypto2,days,event.target.value);
-    settingChartData(setChartData,prices1,prices2);
+    settingChartData(setChartData,prices1,prices2,crypto1Data.name,crypto2Data.name);
     setLoading(false);
 };
 

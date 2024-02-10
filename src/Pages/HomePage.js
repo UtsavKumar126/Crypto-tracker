@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import CoinContext from "../Context/CoinContext"
 import { RWebShare } from "react-web-share";
 import Footer from "../Components/Footer";
+import { toast } from "react-toastify";
 
 
 const HomePage=()=>{
@@ -46,7 +47,7 @@ const HomePage=()=>{
                         title: "Crypto Tracker",
                     }}
                     onClick={() =>
-                        console.log("shared successfully!")
+                        toast.success("shared successfully!")
                     }
                 >
                 <button className="share">Share</button>

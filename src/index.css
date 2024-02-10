@@ -10,7 +10,7 @@
   --back-ground-color:var(--black);
   --color-element:var(--white);
   --chip-background-color:var(--darkgrey);
-  --list-background-color-hover:var(--grey);
+  --list-background-color-hover:var(--darkgrey);
   --anchor-hover:var(--lightgrey);
   --bacback-ground-color-search:var(--darkgrey);
   --heading:var(--white);
